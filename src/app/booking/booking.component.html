@@ -1,0 +1,100 @@
+<div class="background">
+  <div class="view">
+    <div class="container">
+
+
+<form [formGroup]= "bookingForm">
+  <h3><span class="glyphicon glyphicon-lock" ></span> Booking</h3>
+  <div class="form-group row">
+
+    <label for="name" class="col-sm-2 col-form-label">Name:</label>
+    <div class="col-sm-5">
+      <input type="name" name="name" id="name" class="form-control" formControlName="name"/>
+      <div class="alert alert-danger"
+           [hidden]="bookingForm.controls.name.untouched ||bookingForm.controls.name.valid">
+        A valid  Name is required
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email:</label>
+  <div class="col-sm-5">
+      <input type="email" name="email" id="email" class="form-control" formControlName="email"/>
+      <div class="alert alert-danger"
+           [hidden]="bookingForm.controls.email.untouched ||bookingForm.controls.email.valid">
+        A valid email address is required
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="phone" class="col-sm-2 col-form-label">Phone:</label>
+    <div class="col-sm-5">
+      <input type="password" name="phone" id="phone" class="form-control" formControlName="phone"/>
+      <div class="alert alert-danger"
+           [hidden]="bookingForm.controls.phone.untouched || bookingForm.controls.phone.valid">
+         Phone Number is required
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label for="rentStart" class="col-sm-2 col-form-label">RentStart:</label>
+    <div class="col-sm-5">
+      <input type="rentStart" name="rentStart" id="rentStart" class="form-control" formControlName="rentStart"/>
+      <div class="alert alert-danger"
+           [hidden]="bookingForm.controls.rentStart.untouched || bookingForm.controls.rentStart.valid">
+        Enter Valid details
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+  <label for="rentEnd" class="col-sm-2 col-form-label">RentEnd:</label>
+  <div class="col-sm-5">
+    <input type="rentEnd" name="rentEnd" id="rentEnd" class="form-control" formControlName="rentEnd"/>
+    <div class="alert alert-danger"
+         [hidden]="bookingForm.controls.rentEnd.untouched || bookingForm.controls.rentEnd.valid">
+      Enter Valid Details
+    </div>
+  </div>
+</div>
+
+
+    <div class="form-group row">
+    <label for="bikeSel" class="col-sm-2 col-form-label">SelectBike:</label>
+    <div class="col-sm-5">
+      <input type="bikeSel" name="bikeSel" id="bikeSel" class="form-control" formControlName="bikeSel"/>
+      <div class="alert alert-danger"
+           [hidden]="bookingForm.controls.bikeSel.untouched || bookingForm.controls.bikeSel.valid">
+        Enter Valid Details
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-success" [disabled]="!bookingForm.valid">Login</button>
+      <button type="submit" class="btn btn-success" style="margin-left: 10px" (click)="navigateToRegistration()">Booking</button>
+    </div>
+
+  </div>
+  <br/>
+
+  <div class="statusRow">
+    <br/>
+    <div class="label label-important" *ngIf="errorMessage">
+      <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
+    </div>
+  </div>
+
+</form>
+    </div>
+  </div>
+</div>
+
+

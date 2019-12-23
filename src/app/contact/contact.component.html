@@ -1,0 +1,66 @@
+<div class="background-contact">
+  <div class="view">
+    <div class="container">
+
+
+      <form [formGroup]="contactform">
+      <h4> <img src="src/images/inquiry.jpeg">Contact </h4>
+        <div class="form-group row">
+          <label for="userName" class="col-sm-2 col-form-label">Name:</label>
+          <div class="col-sm-5">
+            <input type="userName" name="userName" id="userName" class="form-control" formControlName="userName"/>
+            <div class="alert alert-danger"
+                 [hidden]="contactform.controls.userName.untouched || contactform.controls.userName.valid">
+              A valid User Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-2 col-form-label">Email:</label>
+          <div class="col-sm-5">
+            <input type="email" name="email" id="email" class="form-control" formControlName="email"/>
+            <div class="alert alert-danger"
+                 [hidden]="contactform.controls.email.untouched || contactform.controls.email.valid">
+              Email is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phone" class="col-sm-2 col-form-label">Phone:</label>
+          <div class="col-sm-5">
+            <input type="text" name="phone" id="phone" class="form-control" formControlName="phone"/>
+            <div class="alert alert-danger"
+                 [hidden]="contactform.controls.phone.untouched || contactform.controls.phone.valid">
+              Phone Number is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="message" class="col-sm-2 col-form-label">Message:</label>
+          <div class="col-sm-5">
+            <input type="text" name="message" id="message" class="form-control" formControlName="message"/>
+            <div class="alert alert-danger"
+                 [hidden]="contactform.controls.message.untouched || contactform.controls.message.valid">
+              Message is required
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-12">
+<!--            <button type="submit" class="btn btn-success" [disabled]="!contactform.valid">Login</button>-->
+            <button type="submit" class="btn btn-success" style="margin-left: 10px" (click)="navigateToRegistration()">Submit</button>
+          </div>
+
+        </div>
+        <br/>
+        <div class="statusRow">
+          <br/>
+          <div class="label label-important" *ngIf="errorMessage">
+            <span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

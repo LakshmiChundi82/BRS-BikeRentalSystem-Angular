@@ -1,0 +1,167 @@
+<div>
+  <div class="view">
+    <div class="container" style="padding-top: 20px">
+      <form [formGroup]="registerForm" (click)="onSubmit()">
+        <h3><span class="glyphicon glyphicon-lock" align="center"></span>Register</h3>
+        <div class="form-group row">
+          <label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+          <div class="col-sm-5">
+            <input name="id" type="hidden" formControlName="id"/>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+            <div class="alert alert-danger"
+                 [hidden]="registerForm.controls.firstName.untouched || registerForm.controls.firstName.valid">
+              First Name is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+          <div class="col-sm-5">
+            <input type="text" id="lastName" formControlName="lastName" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"/>
+            <div class="alert alert-danger"
+                 [hidden]="registerForm.controls.lastName.untouched || registerForm.controls.lastName.valid">
+              Last Name is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="userEmail" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-5">
+            <input type="text" id="userEmail" formControlName="userEmail" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.userEmail.errors }"/>
+            <div class="alert alert-danger"
+                 [hidden]="registerForm.controls.userEmail.untouched || registerForm.controls.userEmail.valid">
+              User Email is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="password" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-5">
+            <input type="password" id="password" formControlName="password" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+            <div class="alert alert-danger"
+                 [hidden]="registerForm.controls.password.untouched || registerForm.controls.password.valid">
+              Password is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="isValid()" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+          </button>
+          <a routerLink="/login" class="btn btn-link">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <div style="margin: 20px">
+      <table class="table" style="margin-right: 10px">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">User Email</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of Repdata ; let i=index">
+          <td>{{i + 1}}</td>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.userEmail}}</td>
+          <td>
+            <div class="col-xs-4">
+              <button type="button" data-toggle="modal" data-target="#exampleModal">
+                <i class="fa fa-edit" (click)="open(mymodal,user)"> </i>
+              </button>
+            </div>
+          </td>
+          <td>
+            <div class="col-xs-4">
+              <i class="fa fa-trash" (click)="delete(user._id)"> </i>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Recipient:</label>
+                  <input type="text" class="form-control" id="recipient-name">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Message:</label>
+                  <textarea class="form-control" id="message-text"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #mymodal let-modal class="modal-xl" >
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Update Registration</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="updateForm" style="width: 450px">
+            <div class="form-group row">
+              <label for="firstName" class="col-sm-4 col-form-label">First Name</label>
+              <div class="col-sm-8">
+                <input name="id" type="hidden" formControlName="updateId"/>
+                <input type="text" id="updateFirstName" formControlName="updateFirstName" class="form-control"/>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="lastName" class="col-sm-4 col-form-label">Last Name</label>
+              <div class="col-sm-8">
+                <input type="text" id="updateLastName" formControlName="updateLastName" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="userEmail" class="col-sm-4 col-form-label">Email</label>
+              <div class="col-sm-8">
+                <input type="text" id="updateUserEmail" formControlName="updateUserEmail" class="form-control"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-sm-4 col-form-label">Password</label>
+              <div class="col-sm-8">
+                <input type="password" id="updatePassword" formControlName="updatePassword" class="form-control"/>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); ed">Ok</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
